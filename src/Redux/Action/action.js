@@ -31,6 +31,6 @@ export const DecreaseQty=(data)=>{
     console.log("Decrease action called",data);
     return {
         type: DECREASE_QUANTITY,
-        data:data.name
+        data:data
     }
 }

@@ -15,7 +15,7 @@ export const cartData=(data=InitProduct,action)=>{
                 let carts={
                     id:action.data.id,
                     qty:1,
-                    name:DATA.name,
+                    name:DATA.title,
                     image:DATA.image,
                     price:DATA.price,
                 }
@@ -33,7 +33,7 @@ export const cartData=(data=InitProduct,action)=>{
                  let _Carts={
                      id:DATA.id,
                      qty:1,
-                     name: DATA.name,
+                     name: DATA.title,
                      image:DATA.image,
                      price:DATA.price,
 
@@ -47,24 +47,34 @@ export const cartData=(data=InitProduct,action)=>{
          };
         case  REMOVE_TO_CART:
             console.log(" REMOVE reducer called ",action)
-            data.length=data.length? data.length-1 : [];
-            const remainingItem = data.filter((item)=>item.id!==action.data);
-            console.log("remaining item: ",remainingItem);
-
-            return [...remainingItem];
-
+          const Qty = data.Cart[DATA].qty;
+            return {
+                ...data,
+                numCart: data.numCart - Qty,
+                Cart:data.Cart.filter(item =>{
+                    return item.id!==data.Cart[DATA].id
+                })
+            }
         case  EMPTY_TO_CART:
             console.log(" Empty reducer called ",action)
             data =[];
             return [...data];
         case  INCREASE_QUANTITY:
             console.log(" Increase reducer called ",action)
-
-            return [...data];
+            data.numCart++;
+            data.Cart[DATA].qty++;
+            return{
+                ...data
+            }
         case  DECREASE_QUANTITY:
             console.log(" Decrease reducer called ",action)
+            console.log(data.Cart[DATA].qty);
 
-            return [...data];
+            if(data.Cart[DATA].qty>1) {
+                data.numCart--;
+                data.Cart[DATA].qty--;
+            }
+            return {...data};
         default:
             return data ;
 

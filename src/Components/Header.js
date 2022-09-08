@@ -3,8 +3,8 @@ import {useSelector} from "react-redux";
 import {Link, NavLink} from "react-router-dom";
 
 export const Header = ()=>{
-     const result=useSelector((state) => state.cartData);
-     // console.log(result.length);
+    const result=useSelector((state) => state.cartData);
+      console.log("result",result);
 
     return(
         <div>
@@ -19,7 +19,7 @@ export const Header = ()=>{
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <div className="buttons">
                             <Link to="/cart" className="btn btn-outline-dark ms-2">
-                                <i className="fa fa-shopping-cart me-1"></i>cart({result.length})</Link>
+                                <i className="fa fa-shopping-cart me-1"></i>cart({result.numCart})</Link>
                         </div>
                     </div>
                 </div>
